@@ -1,0 +1,42 @@
+image: google/cloud-sdk:alpine
+
+services:
+    - docker:18.09-dind
+
+stages:
+    - build
+
+variables:
+  VERSION: $CI_COMMIT_SHORT_SHA
+
+.gcp-auth: &gcp-auth
+    - echo $GCLOUD_SERVICE_KEY | base64 -d > ${HOME}/gcloud-service-key.json
+    - gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+    - gcloud config set project '<your-project-id>'  
+    - gcloud auth configure-docker --quiet
+
+after_script:
+  - rm ${HOME}/gcloud-service-key.json
+  - echo "Deployment Successfully"
+
+.push-image-step: &push-image-step
+    - docker build -t gcr.io/${GCLOUD_PROJECT_NAME}/data-monitor-exporter:${VERSION} .
+    - docker push gcr.io/${GCLOUD_PROJECT_NAME}/data-monitor-exporter:${VERSION}
+
+
+build_docker:
+    stage: build
+    script:
+        - *gcp-auth
+        - *push-image-step
+    only:
+      refs:
+        - master
+
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 SELECT
     dt,
-    count(distinct pkgId) as value
+    count(distinct pkgId) as resultValue
 FROM
     `your-table-name`
 where

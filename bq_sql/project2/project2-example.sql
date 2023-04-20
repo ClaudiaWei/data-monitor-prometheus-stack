@@ -10,7 +10,7 @@ WITH temp AS (
 )
 SELECT
     hour_ts AS hour,
-    count(1) as value
+    count(1) as resultValue
 FROM
     temp
 WHERE

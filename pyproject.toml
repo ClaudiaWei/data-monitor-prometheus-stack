@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "data-monitor"
+version = "0.1.0"
+description = ""
+authors = ["Claudia Wei <claudia84012345@gmail.com>"]
+readme = "README.md"
+packages = [{include = "data_monitor"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+google-cloud-datastore = "^2.15.1"
+prometheus-client = "^0.16.0"
+google-cloud-bigquery = "^3.9.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

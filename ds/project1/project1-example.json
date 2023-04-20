@@ -1,0 +1,11 @@
+{
+    "namespace": "",
+    "kind": "",
+    "filters": [
+        [
+            "durationType",
+            "=",
+            "day"
+        ]
+    ]
+}
